@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Carrito de compras Vue.js</title>
+        <link rel="stylesheet" href="estilos/estilos.css">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous">
+    </head>
+    <body>
+        <div id="app"> 
+            <br>
+            <br>
+            <div id="filtro">
+                <div>
+                    <input type="number" v-model="datos.precioMax"
+                        placeholder="Precio máximo" class="form-control">
+                </div>
+                <div>
+                    <select class="form-control"
+                        aria-label="Large select example"
+                        v-model="datos.categoria">
+                        <option value="" selected>All</option>
+                        <option :value="categoria.id"
+                            v-for="categoria in categorias">{{categoria.name}}</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="button" value="Filtrar"
+                        class="btn btn-secondary btn-lg"
+                        @click.prevent="consultar(datos.categoria)">
+                </div>
+                <div class="dropdown" v-if="datos.ver==true">
+                    <button class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Elementos añadidos al carrito {{cant}}
+                    </button>
+                    <div class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#"
+                            v-for="producto in datos.cesta">({{producto.cantidad}})
+                            {{producto.name}} ${{producto.precio}}</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contener">
+                <div class="card" v-for="producto  in api"
+                    v-if="producto.price<=datos.precioMax || datos.precioMax == null || datos.precioMax == ''">
+                    <img :src="cambiarCaracteres(producto.images[0])"
+                        :alt="producto.title">
+                    <div class="container">
+                        <h4><b>{{producto.title}}</b></h4>
+                        <div>
+                            <p id="descripcion">
+                                {{producto.description}}
+                            </p>
+                        </div>
+                        <p>Categoría: {{producto.category.name}}</p>
+                        <div id="precio">
+                            <span><b>Precio:</b> ${{producto.price}}</span>
+                        </div>
+                    </div>
+                    <input id='agregar' type="button" value="Agregar"
+                        class="btn btn-secondary btn-lg"
+                        @click.prevent="agregarProducto(producto.id, producto.title, producto.price)">
+                </div>
+            </div>
+
+        </div>
+        <script
+            src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+        <script src="scripts/funciones.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    </body>
+</html>

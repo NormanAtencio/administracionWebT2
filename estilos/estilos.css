@@ -1,0 +1,41 @@
+.card {
+    box-shadow : 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    width: 350px;
+    margin: 15px;
+    padding-bottom: 15px;
+
+}
+
+img {
+    border-radius: 5px 5px 0 0;
+    height: 200px;
+    width: 350px;
+
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+#contener{
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%,25rem), 1fr));
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+}
+
+#filtro{
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%,25rem), 1fr));
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+}
+
